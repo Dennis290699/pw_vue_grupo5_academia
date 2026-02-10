@@ -4,14 +4,9 @@ import router from "@/router"
 const BASE_URL = 'http://localhost:8081/matricula/api/v1.0/cursos';
 
 const getAuthConfig = () => {
-    const token = localStorage.getItem('jwt');
-    // Si NO hay token...
+    const token = localStorage.getItem('token');
     if (!token) {
-        // 2. Redirigimos al usuario al Login
         router.push({ name: 'login' });
-        // 3. Detenemos todo lanzando un error.
-        // Esto evita que axios intente hacer la petición sin token.
-        throw new Error("Usuario no autenticado. Redirigiendo...");
     }
     return {
         headers: {
@@ -24,7 +19,7 @@ const getAuthConfig = () => {
 const manejarError = (error) => {
     if (error.response && error.response.status === 401) {
         console.warn("Sesión expirada (401). Redirigiendo...");
-        localStorage.removeItem('jwt'); // Limpiamos basura
+        localStorage.removeItem('token'); // Limpiamos basura
         router.push({ name: 'login' });
     }
     // Relanzamos el error para que el componente Vue pueda mostrar alertas si es necesario

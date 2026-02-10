@@ -3,40 +3,49 @@
     <h2>Login</h2>
     <div class="login">
       <label for="usuario">Usuario</label>
-      <input type="text" id="usuario" v-model="usuario" placeholder="Usuario">
-
+      <input type="text" id="usuario" v-model="usuario" placeholder="Usuario" />
       <label for="password">Password</label>
-      <input type="password" id="password" v-model="password" placeholder="Password">
+      <input
+        type="password"
+        id="password"
+        v-model="password"
+        placeholder="Password"
+      />
 
-      <button @click="ingresar()">Ingresar</button>
+      <button @click="ingresar(usuario, password)">Ingresar</button>
     </div>
+  </div>
+  <div v-if="mensaje" class="error">
+    <h1>{{ mensaje }}</h1>
   </div>
 </template>
 
 <script>
-import {crearTokenFachada} from '@/clients/LoginClient'
+import { crearTokenFachada } from "@/clients/LoginClient";
 export default {
-  data(){
-    return{
-      usuario:'',
-      password:'',
-    }
+  data() {
+    return {
+      usuario: "",
+      password: "",
+      mensaje: "",
+    };
   },
-  methods:{
-    async ingresar(){
-      const token = await crearTokenFachada(this.usuario,this.password);
-      if(token){
-        localStorage.setItem('jwt', token.accessToken);
-        localStorage.setItem('autenticado', true);
-        this.$router.push('/mostrar/cursos');
+  methods: {
+    async ingresar(user, pass) {
+      const token = await crearTokenFachada(user, pass);
+      if (token != "") {
+        localStorage.setItem("token", token);
+        localStorage.setItem("estaAutenticado", true);
+        this.$router.push({ name: "mostrarCursos" });
+      } else {
+        setTimeout(() => { this.mensaje = 'Usuario o Contraseña incorrectos';}, 4000);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 .container {
   width: 100%;
   max-width: 300px;
@@ -44,7 +53,21 @@ export default {
   padding: 35px;
   background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+.error {
+  width: 100%;
+  max-width: 300px;
+  margin: 100px auto;
+  padding: 35px;
+  background: linear-gradient(135deg, #ea3c3c 0%, #e12b13 100%);
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+.error h1 {
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 24px;
 }
 
 .container h2 {
@@ -67,20 +90,18 @@ export default {
 }
 
 .login input {
-  width:220px;       
-  height: 35px;     
+  width: 220px;
+  height: 35px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 15px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
-
-
 
 .login input:focus {
   border-color: #6c63ff;
-  box-shadow: 0 0 6px rgba(108,99,255,0.4);
+  box-shadow: 0 0 6px rgba(108, 99, 255, 0.4);
   outline: none;
 }
 

@@ -1,17 +1,23 @@
 <template>
   <div class="container">
     <div class="container_buscar">
-      <p class="buscar"><input type="number" id="id_buscar" v-model="idBuscar" placeholder="buscar por id"/>
-      <button class="btn" @click="buscar">Buscar</button>
+      <p class="buscar">
+        <input
+          type="number"
+          id="id_buscar"
+          v-model="idBuscar"
+          placeholder="buscar por id"
+        />
+        <button class="btn" @click="buscar">Buscar</button>
       </p>
     </div>
     <div class="datos">
       <table class="table">
         <thead class="thead">
           <tr>
-            <th >Codigo</th>
-            <th >Nombre</th>
-            <th >Cupos</th>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Cupos</th>
             <th v-show="acciones">Acción</th>
             <th v-show="acciones">Acción</th>
           </tr>
@@ -101,31 +107,29 @@ export default {
 <style scoped>
 .container {
   display: flex;
-  flex-direction: column;   
-  align-items: center;      
-  justify-content: center;  
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 40px auto;
-
 }
 
 .datos {
   width: 100%;
-  max-width: 500px;        
+  max-width: 500px;
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
 .container-buscar {
-  display: flex;          
-  align-items:center; 
+  display: flex;
+  align-items: center;
   justify-content: flex-end;
-  gap: 10px;              
+  gap: 10px;
 }
- input {
-  flex: 1;               
+input {
+  flex: 1;
   height: 42px;
   width: 250px;
   padding: 6px;
@@ -154,7 +158,7 @@ button.btn:hover {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 .table {
   width: 100%;
@@ -165,8 +169,8 @@ button.btn:hover {
 .table thead th {
   padding: 12px 15px;
   text-align: center;
-  background-color: #847fe0;   /* color de fondo del encabezado */
-  color: white;                /* texto blanco para contraste */
+  background-color: #847fe0; /* color de fondo del encabezado */
+  color: white; /* texto blanco para contraste */
   font-weight: bold;
 }
 
@@ -176,7 +180,7 @@ button.btn:hover {
   border-bottom: 1px solid #ddd;
 }
 button.edi {
-  background: #4CAF50; /* verde para editar */
+  background: #4caf50; /* verde para editar */
   color: white;
   border: 5px;
   border-radius: 8px;
@@ -190,14 +194,14 @@ button.edi {
 button.eli {
   background: #ca1306; /* rojo para eliminar */
   color: white;
-   border: 5px;
+  border: 5px;
   border-radius: 8px;
   width: 80px;
 }
 
 .table button.eli:hover {
   background: #891f1f;
-    border: none;
+  border: none;
 }
 
 button[v-show="acciones"] {
@@ -211,5 +215,4 @@ button[v-show="acciones"] {
   font-size: 14px;
   font-weight: bold;
 }
-
 </style>

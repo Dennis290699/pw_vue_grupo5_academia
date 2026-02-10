@@ -1,6 +1,5 @@
 <template>
   <nav v-if="!$route.meta.hideNavbar">
-    <router-link to="/">Home</router-link> |
     <router-link to="/mostrar/cursos">Cursos</router-link> |
     <router-link to="/mostrar/estudiantes">Estudiantes</router-link> |
     <router-link to="/about">About</router-link>

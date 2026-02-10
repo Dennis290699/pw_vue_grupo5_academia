@@ -37,6 +37,7 @@ export default {
         localStorage.setItem("token", token);
         localStorage.setItem("estaAutenticado", true);
         this.$router.push({ name: "mostrarEstudiantes" });
+        console.log("ESTA LOGUEADO");
       } else {
         setTimeout(() => { this.mensaje = 'Usuario o Contraseña incorrectos';}, 4000);
       }

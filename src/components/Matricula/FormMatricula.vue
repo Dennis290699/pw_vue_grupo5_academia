@@ -3,27 +3,31 @@
     <h3>Nueva Matrícula</h3>
     <form action="">
       <div v-show="visible" class="datos">
-        
         <label>Cédula Estudiante:</label>
-        <input 
-          type="number" 
-          v-model="cedulaInput" 
+        <span class="error-msg" v-if="validar && !cedulaInput">{{
+          requerido
+        }}</span>
+        <input
+          type="number"
+          v-model="cedulaInput"
           placeholder="Ingrese cédula"
         />
 
         <label>Código Curso:</label>
-        <input 
-          type="text" 
-          v-model="codigoInput" 
+        <span class="error-msg" v-if="validar && !codigoInput">{{
+          requerido
+        }}</span>
+        <input
+          type="text"
+          v-model="codigoInput"
           placeholder="Ingrese código de curso"
         />
-
       </div>
 
       <div class="botones">
-        <button 
-          type="submit" 
-          v-show="guardar" 
+        <button
+          type="submit"
+          v-show="guardar"
           @click.prevent="guardarMatricula"
         >
           Guardar
@@ -61,10 +65,13 @@ export default {
       cedulaInput: "",
       codigoInput: "",
       mensaje: "",
+      requerido: "Este campo es requerido",
+      validar: false,
     };
   },
   methods: {
     async guardarMatricula() {
+      this.validar = true;
       if (!this.cedulaInput || !this.codigoInput) {
         this.mensaje = "Ingrese cédula y código";
         this.tiempo();
@@ -87,11 +94,9 @@ export default {
           this.tiempo();
           return;
         }
-
         // 3. Matricular
         this.matricula.estudianteId = est.id;
         this.matricula.cursoId = cur.id;
-
         await matricularFachada(this.matricula);
         this.$emit("salir");
         this.$emit("txt", 1);
@@ -107,6 +112,7 @@ export default {
       this.limpiar();
     },
     limpiar() {
+      this.validar = false;
       this.matricula = {
         estudianteId: "",
         cursoId: "",
@@ -120,13 +126,18 @@ export default {
       }, 4000);
     },
   },
+  computed: {
+    formularioValido() {
+      return this.cedulaInput && this.codigoInput;
+    },
+  },
 };
 </script>
 
 <style scoped>
 .container {
   max-width: 500px;
-  margin: 10px auto; 
+  margin: 10px auto;
   padding: 25px;
   background: #fff;
   border-radius: 12px;
@@ -151,6 +162,13 @@ form {
   font-weight: bold;
   color: #555;
   margin-bottom: 4px;
+}
+.error-msg {
+  color: #ca1306;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: -8px;
+  text-align: left;
 }
 
 input {

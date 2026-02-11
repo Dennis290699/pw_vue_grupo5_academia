@@ -4,18 +4,47 @@
     <form action="">
       <div class="datos">
         <label for="codigoCurso">Codigo:</label>
-        <input type="text" id="codigoCurso" v-model="curso.codigoCurso" />
+        <span class="error-msg" v-if="validar && !curso.codigoCurso">{{
+          requerido
+        }}</span>
+        <input
+          type="text"
+          id="codigoCurso"
+          v-model="curso.codigoCurso"
+          required
+        />
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" v-model="curso.nombre" />
+        <span class="error-msg" v-if="validar && !curso.nombre">{{
+          requerido
+        }}</span>
+        <input type="text" id="nombre" v-model="curso.nombre" required />
         <label for="descripcion">Descripcion:</label>
-        <input type="text" id="descripcion" v-model="curso.descripcion" />
+        <span class="error-msg" v-if="validar && !curso.descripcion">{{
+          requerido
+        }}</span>
+        <input
+          type="text"
+          id="descripcion"
+          v-model="curso.descripcion"
+          required
+        />
         <label for="creditos">Creditos:</label>
-        <input type="number" id="creditos" v-model="curso.creditos" />
+        <span class="error-msg" v-if="validar && !curso.creditos">{{
+          requerido
+        }}</span>
+        <input type="number" id="creditos" v-model="curso.creditos" required />
         <label for="cupos">Cupos:</label>
-        <input type="number" id="cupos" v-model="curso.cupos" />
+        <span class="error-msg" v-if="validar && !curso.cupos">{{
+          requerido
+        }}</span>
+        <input type="number" id="cupos" v-model="curso.cupos" required />
       </div>
       <div class="botones">
-        <button type="submit" v-show="guardar" @click.prevent="guardarCurso">
+        <button
+          type="submit"
+          v-show="guardar"
+          @click.prevent="guardarCurso"
+        >
           Guardar
         </button>
         <button type="submit" v-show="visible" @click.prevent="actualizar">
@@ -56,7 +85,8 @@ export default {
         creditos: "",
         cupos: "",
       },
-
+      requerido: "Este campo es requerido",
+      validar: false,
       mensaje: "",
     };
   },
@@ -89,27 +119,31 @@ export default {
 
     async guardarCurso() {
       try {
+        this.validar = true;
         this.curso.id = null;
-        await guardarFachada(this.curso);
-        this.$emit("salir", "");
-        this.$emit("txt", 1);
-        this.limpiar();
+        if (this.formularioValido) {
+          await guardarFachada(this.curso);
+          this.$emit("salir", "");
+          this.$emit("txt", 1);
+          this.limpiar();
+        }
       } catch {
         this.mensaje = "No se guardo";
         this.tiempo();
       }
     },
     limpiar() {
+      this.false = false;
       this.curso.id = "";
       this.curso.codigoCurso = "";
       this.curso.nombre = "";
       this.curso.descripcion = "";
       this.curso.creditos = "";
-       this.curso.cupos ="";
+      this.curso.cupos = "";
     },
-    cancelar(){
-        this.$emit("salir", "");
-        this.limpiar();
+    cancelar() {
+      this.$emit("salir", "");
+      this.limpiar();
     },
 
     tiempo() {
@@ -118,36 +152,44 @@ export default {
       }, 4000);
     },
   },
+  computed: {
+    formularioValido() {
+      return (
+        this.curso.codigoCurso &&
+        this.curso.codigoCurso.trim() !== "" &&
+        this.curso.nombre &&
+        this.curso.nombre.trim() !== "" &&
+        this.curso.descripcion &&
+        this.curso.descripcion.trim() !== "" &&
+        this.curso.creditos !== "" &&
+        this.curso.creditos > 0 &&
+        this.curso.cupos !== "" &&
+        this.curso.cupos >= 0
+      );
+    },
+  },
 };
 </script>
 <style scoped>
-
 .container {
   max-width: 500px;
   margin: 40px auto;
   padding: 25px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
-
-
-
 }
 form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-
-
 }
 
 .datos {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  
-
 }
 
 .datos label {
@@ -168,7 +210,7 @@ form {
 
 .datos input:focus {
   border-color: #6c63ff;
-  box-shadow: 0 0 6px rgba(108,99,255,0.4);
+  box-shadow: 0 0 6px rgba(108, 99, 255, 0.4);
   outline: none;
 }
 button {
@@ -183,18 +225,25 @@ button {
   margin-top: 25px;
 }
 
+.error-msg {
+  color: #ca1306;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: -8px;
+  text-align: left;
+}
 
 .botones button:hover {
   transform: scale(1.05);
 }
 
 .botones button:nth-child(1) {
-  background: #4CAF50; /* verde para guardar */
+  background: #4caf50; /* verde para guardar */
   color: white;
 }
 
 .botones button:nth-child(2) {
-  background: #4CAF50; /* verde para actializar */
+  background: #4caf50; /* verde para actializar */
   color: white;
 }
 
@@ -208,6 +257,4 @@ h3 {
   margin-top: 20px;
   color: #333;
 }
-
-
 </style>

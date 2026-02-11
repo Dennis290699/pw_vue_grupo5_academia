@@ -17,7 +17,6 @@ const getAuthConfig = () => {
 
 const manejarError = (error) => {
     if (error.response && error.response.status === 401) {
-        console.warn("Sesión expirada (401). Redirigiendo...");
         localStorage.removeItem('token');
         router.push({ name: 'login' });
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="container_buscar">
-      <p class="buscar">
+      <div class="buscar">
         <input
           type="number"
           id="cedula_buscar"
@@ -11,9 +11,9 @@
         <div class="container_btn">
           <button class="btn" @click="buscar">Buscar</button>
         </div>
-      </p>
+      </div>
     </div>
-    <div class="datos">
+    <div v-show="acciones" class="datos">
       <table class="table">
         <thead class="thead">
           <tr>
@@ -22,17 +22,23 @@
             <th>Curso</th>
             <th>Fecha</th>
             <th>Estado Matricula</th>
-            <th v-show="acciones">Acción</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="mat in matriculas" :key="mat.id">
             <td>{{ mat.id }}</td>
-            <td>{{ mat.estudiante ? mat.estudiante.nombre + ' ' + mat.estudiante.apellido : 'N/A' }}</td>
-            <td>{{ mat.curso ? mat.curso.nombre : 'N/A' }}</td>
+            <td>
+              {{
+                mat.estudiante
+                  ? mat.estudiante.nombre + " " + mat.estudiante.apellido
+                  : "N/A"
+              }}
+            </td>
+            <td>{{ mat.curso ? mat.curso.nombre : "N/A" }}</td>
             <td>{{ mat.fecha }}</td>
-            <td>{{ mat.estado}}</td>
-            <td v-show="acciones">
+            <td>{{ mat.estado }}</td>
+            <td v-show="validar(mat.estado)">
               <button class="edi" @click="editar(mat.id)">Anular</button>
             </td>
           </tr>
@@ -45,7 +51,6 @@
 
 <script>
 import {
-  mostrarTodosFachada,
   mostrarPorCedulaEstudianteFachada,
   borrarFachada,
 } from "@/clients/MatriculaClient";
@@ -58,14 +63,13 @@ export default {
       matriculas: [],
     };
   },
-  mounted() {
-    this.Todos();
-  },
+
   methods: {
-    async Todos() {
-      const resp = await mostrarTodosFachada();
-      if (resp) {
-        this.matriculas = resp;
+    validar(estado) {
+      if (estado === "ANULADA") {
+        return false;
+      }else{
+        return true;
       }
     },
     async buscar() {
@@ -86,18 +90,15 @@ export default {
     },
     async editar(id) {
       await borrarFachada(id);
-      this.Todos();
       this.acciones = false;
       this.cedulaBuscar = "";
       this.$emit("txt", 3);
     },
     regresar() {
-      this.Todos();
       this.acciones = false;
     },
   },
 };
-
 </script>
 
 <style scoped>

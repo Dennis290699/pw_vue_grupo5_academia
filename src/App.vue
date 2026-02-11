@@ -3,7 +3,6 @@
     <router-link to="/mostrar/estudiantes">Estudiantes</router-link> |
     <router-link to="/mostrar/cursos">Cursos</router-link> |
     <router-link to="/mostrar/matricula">Matrícula</router-link> |
-    <router-link to="/about">About</router-link>
   </nav>
   <router-view/>
 </template>

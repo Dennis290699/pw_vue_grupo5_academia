@@ -4,6 +4,9 @@
     <form action="">
       <div class="datos">
         <label for="cedula">Cédula:</label>
+        <span class="error-msg" v-if="validar && !estudiante.cedula">{{
+          requerido
+        }}</span>
         <input
           type="number"
           id="cedula"
@@ -11,6 +14,9 @@
           placeholder="Ingrese la cédula"
         />
         <label for="nombre">Nombre:</label>
+        <span class="error-msg" v-if="validar && !estudiante.nombre">{{
+          requerido
+        }}</span>
         <input
           type="text"
           id="nombre"
@@ -18,6 +24,9 @@
           placeholder="Ingrese el nombre"
         />
         <label for="apellido">Apellido:</label>
+        <span class="error-msg" v-if="validar && !estudiante.apellido">{{
+          requerido
+        }}</span>
         <input
           type="text"
           id="apellido"
@@ -25,20 +34,29 @@
           placeholder="Ingrese el apellido"
         />
         <label for="carrera">Carrera:</label>
+        <span class="error-msg" v-if="validar && !estudiante.carrera">{{
+          requerido
+        }}</span>
         <input
           type="text"
           id="carrera"
           v-model="estudiante.carrera"
           placeholder="Ingrese la carrera"
         />
-        
+
         <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <span class="error-msg" v-if="validar && !estudiante.fechaNacimiento">{{
+          requerido
+        }}</span>
         <input
           type="date"
           id="fechaNacimiento"
           v-model="estudiante.fechaNacimiento"
         />
         <label for="telefono">Teléfono:</label>
+        <span class="error-msg" v-if="validar && !estudiante.telefono">{{
+          requerido
+        }}</span>
         <input
           type="text"
           id="telefono"
@@ -47,7 +65,11 @@
         />
       </div>
       <div class="botones">
-        <button type="submit" v-show="guardar" @click.prevent="guardarEstudiante">
+        <button
+          type="submit"
+          v-show="guardar"
+          @click.prevent="guardarEstudiante"
+        >
           Guardar
         </button>
         <button type="submit" v-show="visible" @click.prevent="actualizar">
@@ -94,6 +116,8 @@ export default {
         telefono: "",
       },
       mensaje: "",
+      requerido: "Este campo es requerido",
+      validar: false,
     };
   },
   watch: {
@@ -113,12 +137,15 @@ export default {
     },
     async guardarEstudiante() {
       try {
-        this.estudiante.id = null;
-        console.log("Enviando estudiante:", JSON.stringify(this.estudiante));
-        await guardarFachada(this.estudiante);
-        this.$emit("salir");
-        this.$emit("txt", 1);
-        this.limpiar();
+        this.validar = true;
+        if (this.formularioValido) {
+          this.estudiante.id = null;
+          console.log("Enviando estudiante:", JSON.stringify(this.estudiante));
+          await guardarFachada(this.estudiante);
+          this.$emit("salir");
+          this.$emit("txt", 1);
+          this.limpiar();
+        }
       } catch (error) {
         this.mensaje = "No se guardó";
         this.tiempo();
@@ -140,6 +167,7 @@ export default {
       this.limpiar();
     },
     limpiar() {
+      this.validar = false;
       this.estudiante = {
         id: "",
         cedula: "",
@@ -154,6 +182,22 @@ export default {
       setTimeout(() => {
         this.mensaje = "";
       }, 4000);
+    },
+  },
+  computed: {
+    formularioValido() {
+      return (
+        this.estudiante.cedula &&
+        this.estudiante.nombre &&
+        this.estudiante.nombre.trim() !== "" &&
+        this.estudiante.apellido &&
+        this.estudiante.apellido.trim() !== "" &&
+        this.estudiante.carrera &&
+        this.estudiante.carrera.trim() !== "" &&
+        this.estudiante.fechaNacimiento &&
+        this.estudiante.telefono &&
+        this.estudiante.telefono.trim() !== ""
+      );
     },
   },
 };
@@ -213,6 +257,13 @@ button {
   font-weight: bold;
   margin-left: 20px;
   margin-top: 25px;
+}
+.error-msg {
+  color: #ca1306;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: -8px;
+  text-align: left;
 }
 
 .botones button:hover {

@@ -98,7 +98,6 @@ export default {
 .container {
   margin: 10px auto;
   padding: 5px 25px;
-  background: #fff;
   border-radius: 12px;
   font-family: Arial, sans-serif;
 }

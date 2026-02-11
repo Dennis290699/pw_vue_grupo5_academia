@@ -139,7 +139,7 @@ export default {
   max-width: 500px;
   margin: 10px auto;
   padding: 25px;
-  background: #fff;
+  background: linear-gradient(to right, #40e0d0, #b19cd9); /* ejemplo con gradiente */
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;

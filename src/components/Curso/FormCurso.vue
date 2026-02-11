@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <h3>Datos Curso</h3>
-    <form action="">
+    <div class="formulario">
+      <form action="">
       <div class="datos">
         <label for="codigoCurso">Codigo:</label>
         <span class="error-msg" v-if="validar && !curso.codigoCurso">{{
@@ -12,12 +13,13 @@
           id="codigoCurso"
           v-model="curso.codigoCurso"
           required
+          placeholder="ingrese codigo curso"
         />
         <label for="nombre">Nombre:</label>
         <span class="error-msg" v-if="validar && !curso.nombre">{{
           requerido
         }}</span>
-        <input type="text" id="nombre" v-model="curso.nombre" required />
+        <input type="text" id="nombre" v-model="curso.nombre" required placeholder="ingrese nombre curso"/>
         <label for="descripcion">Descripcion:</label>
         <span class="error-msg" v-if="validar && !curso.descripcion">{{
           requerido
@@ -26,18 +28,19 @@
           type="text"
           id="descripcion"
           v-model="curso.descripcion"
+          placeholder="ingrese descripcion curso"
           required
         />
         <label for="creditos">Creditos:</label>
         <span class="error-msg" v-if="validar && !curso.creditos">{{
           requerido
         }}</span>
-        <input type="number" id="creditos" v-model="curso.creditos" required />
+        <input type="number" id="creditos" v-model="curso.creditos" required placeholder="ingrese creditos curso"/>
         <label for="cupos">Cupos:</label>
         <span class="error-msg" v-if="validar && !curso.cupos">{{
           requerido
         }}</span>
-        <input type="number" id="cupos" v-model="curso.cupos" required />
+        <input type="number" id="cupos" v-model="curso.cupos" required placeholder="ingrese cupos curso"/>
       </div>
       <div class="botones">
         <button
@@ -54,6 +57,7 @@
       </div>
       <h3>{{ mensaje }}</h3>
     </form>
+    </div>
   </div>
 </template>
 <script>
@@ -175,18 +179,20 @@ export default {
   max-width: 500px;
   margin: 40px auto;
   padding: 25px;
-  background: #fff;
+  background: linear-gradient(to right, #40e0d0, #b19cd9); /* ejemplo con gradiente */
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
-form {
+.formulario {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 10px;
 }
 
 .datos {
+
   display: flex;
   flex-direction: column;
   gap: 12px;

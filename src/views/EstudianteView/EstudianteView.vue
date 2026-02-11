@@ -110,6 +110,7 @@ export default {
 .container {
   margin: 10px auto;
   padding: 5px 25px;
+  background: #fff;
   border-radius: 12px;
   font-family: 'Inter', sans-serif;
   width: 100%;
@@ -145,7 +146,7 @@ export default {
 .btncrea {
   height: 40px;
   width: 150px;
-  background: #4CAF50;
+  background: #4CAF50; /* Green */
   color: white;
   border: none;
   border-radius: 8px;

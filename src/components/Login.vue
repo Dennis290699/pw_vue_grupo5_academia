@@ -64,6 +64,7 @@ export default {
   height: 100vh;
   background-color: #f0f2f5;
   
+  /* Ensure full screen coverage */
   position: fixed;
   top: 0;
   left: 0;

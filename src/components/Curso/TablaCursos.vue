@@ -123,7 +123,7 @@ export default {
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  margin: 0;
+  margin: 0; /* Reset margin as it's handled by container gap if needed */
 }
 
 .container_buscar {
@@ -137,11 +137,11 @@ export default {
 
 p.buscar {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stack items vertically */
   gap: 15px;
   width: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Ensure items are centered */
 }
 
 input {
@@ -156,15 +156,15 @@ input {
 }
 
 input:focus {
-  border-color: #4CAF50;
+  border-color: #4CAF50; /* Green focus */
   background-color: #fff;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15); /* Green shadow */
   outline: none;
 }
 
 button.btn {
   padding: 12px 30px;
-  background: #4CAF50;
+  background: #4CAF50; /* Green button */
   color: white;
   border: none;
   border-radius: 8px;
@@ -209,6 +209,7 @@ button.btn:hover {
   background-color: #fafbfc;
 }
 
+/* Action Buttons in Table */
 button.edi, button.eli {
   padding: 8px 16px;
   border: none;
@@ -241,6 +242,7 @@ button.eli:hover {
   color: #c0392b;
 }
 
+/* Regresar Button */
 .btn-regresar {
   margin-top: 25px;
   padding: 12px 30px;

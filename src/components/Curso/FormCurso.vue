@@ -202,7 +202,7 @@ form {
 
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .datos label {

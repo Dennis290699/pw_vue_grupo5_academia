@@ -2,6 +2,10 @@
   <footer class="app-footer">
     <div class="footer-content">
       <p class="copyright">© 2026 Academia Grupo 5. Todos los derechos reservados.</p>
+      <nav class="footer-nav">
+        <a href="#">UCE</a>
+        <a href="#">Política de Privacidad</a>
+      </nav>
       <div class="team-section">
         <span class="team-label">Equipo de Desarrollo:</span>
         <p class="team-members">

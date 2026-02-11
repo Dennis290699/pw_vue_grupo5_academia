@@ -113,6 +113,7 @@ body {
   font-weight: 700;
 }
 
+/* Global: Remove arrows/spinners from number inputs */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

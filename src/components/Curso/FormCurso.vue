@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h3>Datos Curso</h3>
-      <form action="">
+    <form action="">
       <div class="datos">
         <label for="codigoCurso">Codigo:</label>
         <span class="error-msg" v-if="validar && !curso.codigoCurso">{{
@@ -12,13 +12,12 @@
           id="codigoCurso"
           v-model="curso.codigoCurso"
           required
-          placeholder="ingrese codigo curso"
         />
         <label for="nombre">Nombre:</label>
         <span class="error-msg" v-if="validar && !curso.nombre">{{
           requerido
         }}</span>
-        <input type="text" id="nombre" v-model="curso.nombre" required placeholder="ingrese nombre curso"/>
+        <input type="text" id="nombre" v-model="curso.nombre" required />
         <label for="descripcion">Descripcion:</label>
         <span class="error-msg" v-if="validar && !curso.descripcion">{{
           requerido
@@ -27,19 +26,18 @@
           type="text"
           id="descripcion"
           v-model="curso.descripcion"
-          placeholder="ingrese descripcion curso"
           required
         />
         <label for="creditos">Creditos:</label>
         <span class="error-msg" v-if="validar && !curso.creditos">{{
           requerido
         }}</span>
-        <input type="number" id="creditos" v-model="curso.creditos" required placeholder="ingrese creditos curso"/>
+        <input type="number" id="creditos" v-model="curso.creditos" required />
         <label for="cupos">Cupos:</label>
         <span class="error-msg" v-if="validar && !curso.cupos">{{
           requerido
         }}</span>
-        <input type="number" id="cupos" v-model="curso.cupos" required placeholder="ingrese cupos curso"/>
+        <input type="number" id="cupos" v-model="curso.cupos" required />
       </div>
       <div class="botones">
         <button
@@ -199,22 +197,6 @@ form {
 }
 
 .datos {
-
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.datos label {
-  font-weight: 600;
-  color: #34495e;
-  font-size: 14px;
-  margin-bottom: 5px;
-  display: block;
-}
-
-
-.datos {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -270,6 +252,7 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
+/* Guardar & Actualizar (Primary) */
 .botones button:nth-child(1),
 .botones button:nth-child(2) {
   background: #6c63ff;
@@ -281,6 +264,7 @@ button:hover {
   background: #5a52d5;
 }
 
+/* Cancelar (Secondary/Danger) */
 .botones button:nth-child(3) {
   background: #ff6b6b;
   color: white;

@@ -132,7 +132,7 @@ export default {
 
 .buscar {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stack items vertically */
   gap: 15px;
   width: 100%;
   justify-content: center;
@@ -208,6 +208,7 @@ button.btn:hover {
   background-color: #fafbfc;
 }
 
+/* Action Buttons in Table */
 button.edi {
   padding: 8px 16px;
   border: none;
@@ -227,6 +228,7 @@ button.edi:hover {
   color: #c0392b;
 }
 
+/* Regresar Button */
 .btn-regresar {
   margin-top: 25px;
   padding: 12px 30px;

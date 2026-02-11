@@ -216,6 +216,7 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
+/* Guardar & Actualizar (Primary) */
 .botones button:nth-child(1) {
   background: #6c63ff;
   color: white;
@@ -225,6 +226,7 @@ button:hover {
   background: #5a52d5;
 }
 
+/* Cancelar (Secondary/Danger) */
 .botones button:nth-child(2) {
   background: #ff6b6b;
   color: white;

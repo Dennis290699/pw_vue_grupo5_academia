@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h3>Datos Estudiante</h3>
-      <form action="">
+    <form action="">
       <div class="datos">
         <label for="cedula">Cédula:</label>
         <span class="error-msg" v-if="validar && !estudiante.cedula">{{
@@ -223,15 +223,7 @@ h3 {
   font-weight: 700;
 }
 
-h3 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #2c3e50;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.formulario {
+form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -293,6 +285,7 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
+/* Guardar & Actualizar (Primary) */
 .botones button:nth-child(1),
 .botones button:nth-child(2) {
   background: #6c63ff;
@@ -304,6 +297,7 @@ button:hover {
   background: #5a52d5;
 }
 
+/* Cancelar (Secondary/Danger) */
 .botones button:nth-child(3) {
   background: #ff6b6b;
   color: white;
